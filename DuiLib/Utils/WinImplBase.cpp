@@ -172,27 +172,42 @@ LRESULT WindowImplBase::OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOO
 
 LRESULT WindowImplBase::OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	LPMINMAXINFO lpMMI = (LPMINMAXINFO) lParam;
-
 	MONITORINFO oMonitor = {};
 	oMonitor.cbSize = sizeof(oMonitor);
-	::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTONEAREST), &oMonitor);
+	::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTOPRIMARY), &oMonitor);
 	CDuiRect rcWork = oMonitor.rcWork;
-	CDuiRect rcMonitor = oMonitor.rcMonitor;
-	rcWork.Offset(-oMonitor.rcMonitor.left, -oMonitor.rcMonitor.top);
+	rcWork.Offset(-rcWork.left, -rcWork.top);
 
-	// 计算最大化时，正确的原点坐标
-	lpMMI->ptMaxPosition.x	= rcWork.left;
-	lpMMI->ptMaxPosition.y	= rcWork.top;
-
-	lpMMI->ptMaxTrackSize.x =rcWork.GetWidth();
-	lpMMI->ptMaxTrackSize.y =rcWork.GetHeight();
-
-	lpMMI->ptMinTrackSize.x =m_PaintManager.GetMinInfo().cx;
-	lpMMI->ptMinTrackSize.y =m_PaintManager.GetMinInfo().cy;
+	/// 窗口最大化时裁剪阴影所占区域  
+	LPMINMAXINFO lpMMI = (LPMINMAXINFO)lParam;
+	lpMMI->ptMaxPosition.x = rcWork.left - 5;
+	lpMMI->ptMaxPosition.y = rcWork.top - 3;
+	lpMMI->ptMaxSize.x = rcWork.right + 10;
+	lpMMI->ptMaxSize.y = rcWork.bottom + 10;
 
 	bHandled = FALSE;
 	return 0;
+	//LPMINMAXINFO lpMMI = (LPMINMAXINFO) lParam;
+
+	//MONITORINFO oMonitor = {};
+	//oMonitor.cbSize = sizeof(oMonitor);
+	//::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTONEAREST), &oMonitor);
+	//CDuiRect rcWork = oMonitor.rcWork;
+	//CDuiRect rcMonitor = oMonitor.rcMonitor;
+	//rcWork.Offset(-oMonitor.rcMonitor.left, -oMonitor.rcMonitor.top);
+
+	//// 计算最大化时，正确的原点坐标
+	//lpMMI->ptMaxPosition.x	= rcWork.left;
+	//lpMMI->ptMaxPosition.y	= rcWork.top;
+
+	//lpMMI->ptMaxTrackSize.x =rcWork.GetWidth();
+	//lpMMI->ptMaxTrackSize.y =rcWork.GetHeight();
+
+	//lpMMI->ptMinTrackSize.x =m_PaintManager.GetMinInfo().cx;
+	//lpMMI->ptMinTrackSize.y =m_PaintManager.GetMinInfo().cy;
+
+	//bHandled = FALSE;
+	//return 0;
 }
 
 LRESULT WindowImplBase::OnMouseWheel(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
