@@ -11,11 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseWin.h" />
     <ClInclude Include="DuiFrameWnd.h" />
     <ClInclude Include="UIAnimation.h" />
     <ClInclude Include="UIFadeButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseWin.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIAnimation.cpp" />
     <ClCompile Include="UIFadeButton.cpp" />

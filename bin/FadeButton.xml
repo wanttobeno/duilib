@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window size="500,300" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="500,300">
+<Window size="500,300" roundcorner="5,5" caption="0,0,0,90" mininfo="500,300">
    <VerticalLayout  bkcolor="#FFF3F5F5">
     <HorizontalLayout height="50">
+    <Control>
+    </Control>
+    <Button name="closebtn" height="16" width="16" bkimage="Icon/Close.png" >
+    </Button>
     </HorizontalLayout>
     <HorizontalLayout height="50">
       <Label name="tw_bk_trend" float="true" pos="50,0,250,250" width="120" height="20" text="渐变按钮测试" bkcolor="0xFFEDC753">
       </Label>
     </HorizontalLayout>
     <HorizontalLayout>
-      <FadeButton name="SettingBtn" text="设置" float="true" pos="75, 30, 150, 54" tooltip="Use English Language" normalimage="button_nor.bmp" hotimage="button_over.bmp" pushedimage="button_down.bmp">
+      <FadeButton name="SettingBtn" text="设置" float="true" pos="75, 30, 150, 54" normalimage="button_nor.bmp" hotimage="button_over.bmp" pushedimage="button_down.bmp">
       </FadeButton>
-      <FadeButton name="loginBtn" text="登录" float="true" pos="175, 30, 250, 54" tooltip="点击这里登录游戏" normalimage="button_nor.bmp" hotimage="button_over.bmp" pushedimage="button_down.bmp">
+      <FadeButton name="loginBtn" text="登录" float="true" pos="175, 30, 250, 54" normalimage="button_nor.bmp" hotimage="button_over.bmp" pushedimage="button_down.bmp">
       </FadeButton>
     </HorizontalLayout>
   </VerticalLayout>

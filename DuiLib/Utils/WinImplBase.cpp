@@ -176,14 +176,13 @@ LRESULT WindowImplBase::OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam,
 	oMonitor.cbSize = sizeof(oMonitor);
 	::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTOPRIMARY), &oMonitor);
 	CDuiRect rcWork = oMonitor.rcWork;
-	rcWork.Offset(-rcWork.left, -rcWork.top);
+	rcWork.Offset(-oMonitor.rcMonitor.left, -oMonitor.rcMonitor.top);
 
-	/// 窗口最大化时裁剪阴影所占区域  
 	LPMINMAXINFO lpMMI = (LPMINMAXINFO)lParam;
-	lpMMI->ptMaxPosition.x = rcWork.left - 5;
-	lpMMI->ptMaxPosition.y = rcWork.top - 3;
-	lpMMI->ptMaxSize.x = rcWork.right + 10;
-	lpMMI->ptMaxSize.y = rcWork.bottom + 10;
+	lpMMI->ptMaxPosition.x = rcWork.left;
+	lpMMI->ptMaxPosition.y = rcWork.top;
+	lpMMI->ptMaxSize.x = rcWork.right;
+	lpMMI->ptMaxSize.y = rcWork.bottom;
 
 	bHandled = FALSE;
 	return 0;
