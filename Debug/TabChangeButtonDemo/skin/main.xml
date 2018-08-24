@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="500,400" caption="0,0,0,36" roundcorner="4,4" >
+  <Font name="微软雅黑" size="16" bold="false"  italic="false"  default="true" />
+  <VerticalLayout bkimage="file='winbk.bmp' corner='4,48,4,4' mask='#FFFF00FF'" >
+   <!-- 标题栏 -->
+   <HorizontalLayout height="30" bkcolor="0xFF508CC8">
+     <Label text="TabChangeButtonDemo" textcolor="0xFFFFFFFF" textpadding="5,0,0,0"> 
+     </Label> 
+     <Control>
+     </Control>
+     <!-- 标题栏右侧按钮 -->
+     <HorizontalLayout width="111" >
+      <Button name="minbtn" tooltip="" width="35" height="32" normalimage="file='png/systemBtn.png' source='35,0,70,32'" hotimage="file='png/systemBtn.png' source='35,32,70,64'" pushedimage="file='png/systemBtn.png' source='35,64,70,96'" disabledimage="file='png/systemBtn.png' source='35,96,70,128'"/>
+      <Button name="restorebtn" visible="false" tooltip="" width="35" height="32" normalimage="file='png/systemBtn.png' source='0,0,35,32'" hotimage="file='png/systemBtn.png' source='0,32,35,64'" pushedimage="file='png/systemBtn.png' source='0,64,35,96'" disabledimage="file='png/systemBtn.png' source='0,96,35,128'"/>
+      <Button name="maxbtn" tooltip="" width="35" height="32" normalimage="file='png/systemBtn.png' source='70,0,105,32'" hotimage="file='png/systemBtn.png' source='70,32,105,64'" pushedimage="file='png/systemBtn.png' source='70,64,105,96'" disabledimage="file='png/systemBtn.png' source='70,96,105,128'"/>
+      <Button name="closebtn" tooltip="" width="41" height="32" normalimage="file='png/systemBtn.png' source='105,0,146,32'" hotimage="file='png/systemBtn.png' source='105,32,146,64'" pushedimage="file='png/systemBtn.png' source='105,64,146,96'" disabledimage="file='png/systemBtn.png' source='105,96,146,128'" />
+    </HorizontalLayout>
+  </HorizontalLayout>
+  <TabLayout name="tab" >
+    <Include source="1.xml" />
+    <Include source="2.xml" />
+    <Include source="3.xml" />
+  </TabLayout>
+  <VerticalLayout height="30">
+    <button text="我是按钮" height="25"  bkcolor="0xFF4C7CB1" hotbkcolor="0xFF589CF1" >
+    </button>
+    <Control bkcolor="0xFFD47C2F" ></Control>
+  </VerticalLayout>
+  <CSlideListUI height="100" width="150">
+    <ListHeaderItem name="adfsdf">
+    </ListHeaderItem>
+    <ListHeaderItem name="adfsdf">
+    </ListHeaderItem>
+  </CSlideListUI>
+  <HorizontalLayout height="30" percent="20,40,40" speed="10" distance="10" automove="true">
+    <TabChangeOption tab="tab" selectedid="0" height="20" text = "第一页" bkcolor="#FFFFFFFF" textcolor="#FF0000FF" bkcolor="0xFF97DEFF" hotbkcolor="0xFF589CF1"/>
+    <TabChangeOption tab="tab" selectedid="1" height="20" text = "第二页" bkcolor="#FFFFFFFF" textcolor="#FF0000FF" bkcolor="0xFF97DEFF" hotbkcolor="0xFF589CF1"/>
+    <TabChangeOption tab="tab" selectedid="2" height="20" text = "第三页" bkcolor="#FFFFFFFF" textcolor="#FF0000FF" bkcolor="0xFF97DEFF" hotbkcolor="0xFF589CF1"/>
+  </HorizontalLayout>
+</VerticalLayout>
+</Window>

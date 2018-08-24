@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+  <VerticalLayout inset="4,0,4,4" bkcolor="0xFFCDD1D1" >
+    <HorizontalLayout height="240">
+        <Control>
+        </Control>
+        <GifAnim bkimage="png/BaoBao.gif" height="240" width="240" auto="true"/>
+        <Control>
+        </Control>
+    </HorizontalLayout>
+    <Control />
+    <TabChangeButton tab="tab" selectedid="0" height="20" text = "第一页" bkcolor="#FFFFFFFF" textcolor="#FFFF0000"/>
+    <TabChangeButton tab="tab" selectedid="1" height="20" text = "第二页" bkcolor="#FFFFFFFF" textcolor="#FFFF0000"/>
+    <TabChangeButton tab="tab" selectedid="2" height="20" text = "第三页" bkcolor="#FFFFFFFF" textcolor="#FFFF0000"/>
+</VerticalLayout>
+</Window>
