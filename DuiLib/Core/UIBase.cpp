@@ -489,7 +489,9 @@ void CWindowWnd::ResizeClient(int cx /*= -1*/, int cy /*= -1*/)
 
 LRESULT CWindowWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    return ::CallWindowProc(m_OldWndProc, m_hWnd, uMsg, wParam, lParam);
+	if (::IsWindow(m_hWnd))
+		return ::CallWindowProc(m_OldWndProc, m_hWnd, uMsg, wParam, lParam);
+	return 0;
 }
 
 void CWindowWnd::OnFinalMessage(HWND /*hWnd*/)
