@@ -74,7 +74,8 @@ void CRenderClip::GenerateClip(HDC hDC, RECT rc, CRenderClip& clip)
     ::GetClipBox(hDC, &rcClip);
     clip.hOldRgn = ::CreateRectRgnIndirect(&rcClip);
     clip.hRgn = ::CreateRectRgnIndirect(&rc);
-    ::ExtSelectClipRgn(hDC, clip.hRgn, RGN_AND);
+    ::CombineRgn(clip.hRgn, clip.hRgn, clip.hOldRgn, RGN_AND);
+    ::SelectClipRgn(hDC, clip.hRgn);
     clip.hDC = hDC;
     clip.rcItem = rc;
 }
@@ -87,7 +88,8 @@ void CRenderClip::GenerateRoundClip(HDC hDC, RECT rc, RECT rcItem, int width, in
     clip.hRgn = ::CreateRectRgnIndirect(&rc);
     HRGN hRgnItem = ::CreateRoundRectRgn(rcItem.left, rcItem.top, rcItem.right + 1, rcItem.bottom + 1, width, height);
     ::CombineRgn(clip.hRgn, clip.hRgn, hRgnItem, RGN_AND);
-    ::ExtSelectClipRgn(hDC, clip.hRgn, RGN_AND);
+    ::CombineRgn(clip.hRgn, clip.hRgn, clip.hOldRgn, RGN_AND);
+    ::SelectClipRgn(hDC, clip.hRgn);
     clip.hDC = hDC;
     clip.rcItem = rc;
     ::DeleteObject(hRgnItem);
@@ -347,7 +349,11 @@ TImageInfo* CRenderEngine::LoadImage(STRINGorID bitmap, LPCTSTR type, DWORD mask
 					FILE_ATTRIBUTE_NORMAL, NULL);
 				if( hFile == INVALID_HANDLE_VALUE ) break;
 				dwSize = ::GetFileSize(hFile, NULL);
-				if( dwSize == 0 ) break;
+                if (dwSize == 0)
+                {
+                    ::CloseHandle(hFile);
+                    break;
+                }
 
 				DWORD dwRead = 0;
 				pData = new BYTE[ dwSize ];
@@ -409,7 +415,11 @@ TImageInfo* CRenderEngine::LoadImage(STRINGorID bitmap, LPCTSTR type, DWORD mask
 			FILE_ATTRIBUTE_NORMAL, NULL);
 		if( hFile == INVALID_HANDLE_VALUE ) break;
 		dwSize = ::GetFileSize(hFile, NULL);
-		if( dwSize == 0 ) break;
+        if (dwSize == 0)
+        {
+            ::CloseHandle(hFile);
+            break;
+        }
 
 		DWORD dwRead = 0;
 		pData = new BYTE[ dwSize ];
